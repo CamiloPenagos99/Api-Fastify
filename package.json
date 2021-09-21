@@ -1,0 +1,17 @@
+{
+  "name": "fastify-app",
+  "version": "1.0.0",
+  "description": "example app with Fastify",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server"
+  },
+  "author": "penagoscamilo99@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "fastify": "^3.21.1",
+    "fastify-swagger": "^4.12.0",
+    "nodemon": "^2.0.12"
+  }
+}
