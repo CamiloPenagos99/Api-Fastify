@@ -1,4 +1,4 @@
-const itemsData = require('../item')
+const { getAllItems, getUniqueItem, addItem } = require('../handlers/item_handler');
 
 // Item schema
 const Item = {
@@ -20,7 +20,7 @@ const getItemsOpts = {
       }
     }
   },
-  //handler: listUsers,
+  handler: getAllItems
 };
 
 const uniqueItemOpt = {
@@ -28,26 +28,32 @@ const uniqueItemOpt = {
         response:{
             200:Item 
         }
-    }
+    },
+    handler: getUniqueItem
 }
 
+//post options
+const postItemOpt = {
+  schema: {
+    response:{
+        201:Item 
+    }
+},
+  handler: addItem
 
+};
 
 function itemRoutes(fastify,options,done){
 
     //crear ruta principal
-fastify.get('/items',getItemsOpts,(req, reply)=>{
-    reply.send(itemsData);
-})
+fastify.get('/items',getItemsOpts)
 
 //ruta para obtener item especifico
-fastify.get('/items/:id',uniqueItemOpt,(request, reply)=>{
+fastify.get('/items/:id',uniqueItemOpt)
 
-    const {id}=request.params
-    const item = itemsData.find(item => item._id == id); //buscar en el array de items, por ID
+//endpoint para agregar
 
-    reply.code(200).send(item);
-})
+fastify.post('/items', postItemOpt)
 
 done();
 }
