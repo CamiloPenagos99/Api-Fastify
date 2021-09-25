@@ -37,9 +37,9 @@ const postItemOpt = {
   schema: {
     body:{
       type: 'object',
-      required: ['name'],
+      required: ['tipo'],
       properties:{
-        name: { type: 'string'}
+        tipo: { type: 'string'}
       }
 
     },
