@@ -1,5 +1,12 @@
 const fastify = require ('fastify') ({logger:true});
 
+fastify.register(require('fastify-cors'), { 
+    // put your options here
+    origin: '*',
+    optionsSuccessStatus: 200
+})
+  
+
 fastify.register(require('fastify-swagger'),
     {
     exposeRoute: true,
