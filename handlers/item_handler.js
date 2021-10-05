@@ -14,6 +14,11 @@ const getUniqueItem  = (req,reply)=>{
 const addItem = (req,reply)=>{
     const { tipo } = req.body;
 
+    if(tipo == 'contenedor'){
+        
+        return new Error('error de validación');
+        
+    }
     const item = {
         _id: Date.now(),
         tipo
