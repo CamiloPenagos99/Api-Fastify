@@ -1,4 +1,4 @@
-const { getAllItems, getUniqueItem, addItem } = require('../handlers/item_handler');
+const { getAllItems, getUniqueItem, addItem, deleteItem, updateItem } = require('../handlers/item_handler');
 
 // Item schema
 const Item = {
@@ -23,6 +23,20 @@ const getItemsOpts = {
   handler: getAllItems
 };
 
+//options for get all items
+const DeleteItemOpts = {
+  schema: {
+    response: {
+      200: {
+        type: 'object',
+        properties: {
+          message: { type: 'string' },
+          }
+      }
+    }
+  },
+  handler: deleteItem
+};
 const uniqueItemOpt = {
     schema: {
         response:{
@@ -51,6 +65,20 @@ const postItemOpt = {
 
 };
 
+//update options
+
+//post options
+const UpdateItemOpts = {
+
+  schema: {
+    response:{
+        200:Item 
+    }
+},
+  handler: updateItem
+
+};
+
 function itemRoutes(fastify,options,done){
 
     //crear ruta principal
@@ -62,6 +90,13 @@ fastify.get('/items/:id',uniqueItemOpt)
 //endpoint para agregar
 
 fastify.post('/items', postItemOpt)
+
+//endpoint para borrar
+
+fastify.delete('/items/:id',DeleteItemOpts )
+
+//endpoint para actualizar
+fastify.put('/items/:id',UpdateItemOpts )
 
 done();
 }

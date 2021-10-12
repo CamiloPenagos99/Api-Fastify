@@ -1,4 +1,4 @@
-const data = require ('../item');
+var data = require ('../item');
 
 const getAllItems = (req,reply)=>{
     reply.send(data)
@@ -29,6 +29,23 @@ const addItem = (req,reply)=>{
     reply.code(201).send(item);
 }
 
+const deleteItem = (req, reply)=>{
+    const { id }=req.params
+
+    var n = data.filter((item) => item._id != parseInt(id));
+    data=n
+    reply.send ({message: `Se ha eliminado el item ${id}`})
+}
+const updateItem = (req, reply)=>{
+    var { id } = req.params;
+    id = parseInt(id);
+    const { tipo } = req.body;
+    const n = data.map((item)=>(item._id == id ? {'_id':id, tipo} : item))
+    console.log(tipo)
+    data=n;
+    const found = data.find(element => element._id == id);
+    reply.send(found);
+}
 module.exports = {
-    getAllItems,getUniqueItem, addItem
+    getAllItems,getUniqueItem, addItem, deleteItem, updateItem
 }
